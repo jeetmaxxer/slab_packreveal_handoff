@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>SLAB · Unveil (video)</title>
+	<style>
+		/* An opening as a video, for a frame: nothing but the pack, on whatever is behind the frame. */
+		:root { color-scheme: dark; }
+		html, body { margin: 0; height: 100%; background: none; overflow: hidden; }
+		canvas { position: fixed; left: 0; top: 0; display: block; transform-origin: 0 0; opacity: 0; transition: opacity 0.3s; will-change: transform; }
+		canvas.ready { opacity: 1; }
+		/* (a pair's shared start: a light that swells behind the pack, the same for every rarity) */
+		#charge { position: fixed; left: 50%; top: 50%; width: 300px; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; opacity: 0; pointer-events: none; background: radial-gradient( closest-side, rgb( 255 255 255 / 0.9 ), rgb( 214 222 255 / 0.45 ) 38%, rgb( 160 170 255 / 0.12 ) 68%, transparent ); }
+		#message { position: fixed; inset: 0; display: grid; place-content: center; margin: 0; padding: 16px; text-align: center; color: #8a8c96; font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; pointer-events: none; }
+		#message:empty { display: none; }
+	</style>
+</head>
+<body>
+	<i id="charge" aria-hidden="true"></i>
+	<canvas id="canvas" aria-label="Animation"></canvas>
+	<p id="message"></p>
+	<script type="module" src="./video.js"></script>
+</body>
+</html>

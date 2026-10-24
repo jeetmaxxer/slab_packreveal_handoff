@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>SLAB · Officials reveal</title>
+	<style>
+		/* The officials reveal on a bare stage: the opening (a frame, unveil/video.html) over its tier's
+		   background video, as the site has it. Only what the reveal needs; the site's own page is not here. */
+		:root { color-scheme: dark; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+		body { margin: 0; min-height: 100vh; display: grid; place-items: center; gap: 16px; padding: 16px; box-sizing: border-box; background: #09080d; color: #dde3ec; }
+		.stage { position: relative; width: min( 100%, 960px ); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 24px; background: #111118; }
+		.stage video.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; pointer-events: none; }
+		.stage video.bg.on { opacity: 1; }
+		.stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: none; }
+		.card { position: absolute; left: 50%; bottom: 6%; translate: -50% 0; margin: 0; padding: 6px 14px; border-radius: 8px; background: rgb( 0 0 0 / 0.55 ); font-weight: 600; opacity: 0; transition: opacity 0.3s; }
+		.card.on { opacity: 1; }
+		.controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+		button, select { font: inherit; padding: 8px 14px; border: 1px solid #4c4d55; border-radius: 8px; background: #303137; color: #fff; cursor: pointer; }
+		button.go { border-color: #a698ff; background: #7762fd; }
+		button:disabled { opacity: 0.5; cursor: default; }
+	</style>
+</head>
+<body>
+	<div class="stage">
+		<iframe id="reveal" title="Pack opening" allow="autoplay" src="./unveil/video.html?clip=default-3d-unpacking-slab4&amp;low=middle-tear-top-down-2-rips-slab4&amp;split=rare&amp;intro=500&amp;pace=0.85&amp;box=1,0.14,0.62"></iframe>
+		<p class="card" id="card" aria-live="polite"></p>
+	</div>
+	<div class="controls">
+		<label>Rarity <select id="tier"><option value="common">Common</option><option value="uncommon">Uncommon</option><option value="rare">Rare</option><option value="epic" selected>Legendary (epic)</option></select></label>
+		<button type="button" class="go" id="open" disabled>Open</button>
+		<button type="button" id="reset" disabled>Reset</button>
+	</div>
+	<script type="module" src="./demo.js"></script>
+</body>
+</html>

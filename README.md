@@ -9,6 +9,8 @@ The pack opening the SLAB site plays for the **officials** (`Officials (by rarit
 | Rare | Default 3D unpacking (`default-3d-unpacking-slab4.mp4`) | `bg-rare.mp4` |
 | Epic (shown as "Legendary") | Default 3D unpacking | `bg-legendary.mp4` |
 
+There are two packs, each with its own pair of openings: the **standard** pack (`…-standard.mp4`) and the **vintage** pack (`…-vintage.mp4`, its own page on the site). The demo's **Pack** menu switches between them; on a page, pick the pair in the frame's URL (`clip=default-3d-unpacking-vintage&low=middle-tear-top-down-2-rips-vintage`). The vintage pack also has its own backgrounds, `unveil/bg-vintage-<tier>.mp4`: the same backgrounds as pixel art, with retro pixel particles and effects in them (stars, streaks, shockwaves at the rips, shards, halos, confetti, fireworks, coins, more the rarer). They're pre-recorded (960 × 540), so nothing is drawn at runtime. They fade in and out as dissolving pixels recorded in the video, so the page shows them at full opacity rather than fading them again (`baked` in `demo.js`).
+
 Both openings start the same way: the sealed pack is held for 0.5 s, trembling over a white light, so the rarity isn't given away until the opening itself starts.
 
 Live: https://3jsspace.vercel.app (the pack page starts on the officials).
@@ -57,15 +59,25 @@ Then open the printed address, pick a rarity and press **Open**.
     - First flash to last flash runs over the opening's video, from `rolling`.
     - It waits just short of the last flash until `revealed`, then plays to its end and has faded out.
     - Each frame, the pack is washed towards the background's average colour (`washOf`).
-- The site shows the card itself, as a picture, at `revealed`, along with its details and buttons. In the demo that is a line of text.
+- **The card: slab display and details** (`card.js`, `card.css`, `card-details.css`). At `revealed`, the page shows the card the way the site does:
+  - **The slab** (the graded card's photo) comes out of the pack's middle. It starts as a card of light on its back, turns round to its face, and grows from the pack's card size to full size in one curve (0.85 s at the reveal's pace). Meanwhile the opening's frame fades out, over a white flash tinted the rarity's colour.
+  - **A starburst** sits behind it: long rays in the rarity's colour plus finer white ones, opening out and turning. From rare up, a halo of rays stays behind the slab, turning slowly. A shine sweeps across the slab once it lands.
+  - **The details** appear under the stage about 0.6 s later: the card's name in Anton, its year, number and grade in Fragment Mono, the rarity and value tags, and the Share / Sell / Unpack again buttons. The buttons are slightly glassy, and Sell and Unpack again have a light sweep.
+  - `card-details.css` is generated from the site's own stylesheet, so it always matches the site. It expects the site's font variables (`--font-display`, `--font-mono`, `--font-sans`; `index.html` sets fallbacks) and the Google Fonts link in `index.html`.
+  - `showCard( stage, detailsElement, card, { onAgain, onSell } )` returns `{ remove() }`. A card is `{ name, imageUrl, tier, grader, grade, value }`; `cards.json` has a few real cards from the pack for each rarity. Sell pays 85 % of the value, and a pack costs $50, as on the site.
+  - The site's floating motes and embers (a canvas particle system) and its sound aren't included.
 
 ## Files
 
 | File | Size |
 | --- | --- |
-| `README.md` | 4 KB |
-| `demo.js` | 6 KB |
-| `index.html` | 2 KB |
+| `README.md` | 6 KB |
+| `card-details.css` | 7 KB |
+| `card.css` | 4 KB |
+| `card.js` | 12 KB |
+| `cards.json` | 6 KB |
+| `demo.js` | 7 KB |
+| `index.html` | 3 KB |
 | `review/shared.js` | 7 KB |
 | `slab/js/backdrops.js` | 4 KB |
 | `src/player/AlphaVideo.js` | 8 KB |
@@ -73,9 +85,15 @@ Then open the printed address, pick a rarity and press **Open**.
 | `unveil/bg-legendary.mp4` | 1.17 MB |
 | `unveil/bg-rare.mp4` | 912 KB |
 | `unveil/bg-uncommon.mp4` | 899 KB |
-| `unveil/clips.js` | 1 KB |
-| `unveil/default-3d-unpacking-slab4.mp4` | 2.88 MB |
-| `unveil/middle-tear-top-down-2-rips-slab4.mp4` | 2.12 MB |
+| `unveil/bg-vintage-common.mp4` | 761 KB |
+| `unveil/bg-vintage-legendary.mp4` | 1.57 MB |
+| `unveil/bg-vintage-rare.mp4` | 1.22 MB |
+| `unveil/bg-vintage-uncommon.mp4` | 1.19 MB |
+| `unveil/clips.js` | 2 KB |
+| `unveil/default-3d-unpacking-standard.mp4` | 2.88 MB |
+| `unveil/default-3d-unpacking-vintage.mp4` | 2.95 MB |
+| `unveil/middle-tear-top-down-2-rips-standard.mp4` | 2.28 MB |
+| `unveil/middle-tear-top-down-2-rips-vintage.mp4` | 2.15 MB |
 | `unveil/video.html` | 1 KB |
 | `unveil/video.js` | 11 KB |
 
